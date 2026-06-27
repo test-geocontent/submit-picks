@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 2026 Microcap Stock Picking Contest | Sponsored by GeoInvesting & MS Microcaps</title>
+  <meta name="description" content="$15,000+ in prizes. No entry fee. Compete in the 2026 Microcap Stock Picking Contest across three major conferences. Sponsored by GeoInvesting and MS Microcaps." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://tally.so/widgets/embed.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+	<style>
+    :root {
+      --navy:    #0B1628;
+      --navy2:   #0F1E38;
+      --navy3:   #162544;
+      --charcoal:#1E2A3B;
+      --gold:    #C9A84C;
+      --gold2:   #E8C56A;
+      --gold3:   #F5DFA0;
+      --white:   #F2F4F7;
+      --muted:   #8A97AA;
+      --border:  rgba(201,168,76,0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ── */
+    .display { font-family: 'Playfair Display', Georgia, serif; }
+    .mono    { font-family: 'Roboto Mono', monospace; }
+
+    /* ── Gold rule ── */
+    .rule-gold { border: none; border-top: 1px solid var(--border); }
+
+    /* ── Nav ── */
+    .nav-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11,22,40,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Chart canvas bg ── */
+    #chart-canvas {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: .22;
+    }
+
+    /* ── Hero ── */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, #162544 0%, #0B1628 70%);
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--gold);
+    }
+
+    .headline-main {
+      font-size: clamp(2.1rem, 5.5vw, 4.2rem);
+      line-height: 1.10;
+      color: var(--white);
+    }
+
+    .prize-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #C9A84C 0%, #F5DFA0 55%, #C9A84C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Conference cards */
+    .conf-card {
+      background: rgba(22,37,68,0.7);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .conf-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .conf-card:hover { 
+  border-color: rgba(201,168,76,.5); 
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+    .conf-card:hover::before { opacity: 1; }
+
+/* Beyond the contest cards */
+.product-card{
+  border:1px solid rgba(255,255,255,.06);
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  backdrop-filter:blur(10px);
+  transition:all .25s ease;
+  text-decoration:none;
+    cursor: pointer;
+
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+	.product-card .conf-link{
+  margin-top:auto;
+  padding-top:1rem;
+}
+
+.product-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(201,168,76,.28);
+  box-shadow:0 12px 40px rgba(0,0,0,.28);
+}
+
+/* Conference website link */
+.conf-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gold);
+  text-decoration:none;
+  transition:opacity .2s,color .2s;
+  white-space:nowrap;
+  opacity:.9;
+}
+
+.conf-link:hover{
+  color:var(--gold2);
+  opacity:1;
+}
+
+    /* Countdown */
+    .countdown-block {
+      background: rgba(22,37,68,0.5);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .75rem 1.2rem;
+      text-align: center;
+      min-width: 68px;
+    }
+    .countdown-num {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--gold2);
+    }
+    .countdown-lbl {
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: .1rem;
+    }
+
+    /* Step cards */
+    .step-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 4px;
+      padding: 2rem 1.75rem;
+      transition: border-color .25s;
+    }
+    .step-card:hover { border-color: rgba(201,168,76,.35); }
+    .step-num {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .8rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+    }
+
+    /* Entry badge */
+.entry-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.75rem 1.4rem;
+  border:1px solid rgba(201,168,76,.45);
+  background:rgba(201,168,76,.08);
+  color:var(--gold2);
+  font-size:.92rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  border-radius:999px;
+  box-shadow:0 0 24px rgba(201,168,76,.12);
+  white-space:nowrap;
+}
+    
+    /* Prize pool */
+    .prize-pool-section {
+      background: linear-gradient(180deg, #0F1E38 0%, #0B1628 100%);
+      position: relative;
+    }
+    .prize-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      background: linear-gradient(135deg, #C9A84C 0%, #F5DFA0 50%, #C9A84C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .prize-card {
+      background: rgba(22,37,68,0.65);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      display: flex; align-items: center; gap: .85rem;
+    }
+    .prize-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    /* Why section */
+    .why-section { background: var(--charcoal); }
+    .pullquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      line-height: 1.5;
+      color: var(--white);
+      border-left: 3px solid var(--gold);
+      padding-left: 1.5rem;
+    }
+
+    /* Registration */
+    .reg-section { background: linear-gradient(180deg, #0B1628 0%, #162544 100%); }
+    .benefit-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .92rem;
+      color: #C8D4E0;
+    }
+    .benefit-item:last-child { border-bottom: none; }
+    .benefit-check {
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: .85rem;
+    }
+
+    /* Email form */
+    .email-input {
+      background: rgba(22,37,68,0.7);
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 3px;
+      padding: .85rem 1.2rem;
+      color: var(--white);
+      font-size: .95rem;
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .email-input:focus { border-color: var(--gold); }
+    .email-input::placeholder { color: var(--muted); }
+    .btn-gold {
+      background: linear-gradient(135deg, #C9A84C, #E8C56A);
+      color: #0B1628;
+      font-weight: 600;
+      font-size: .88rem;
+      letter-spacing: .04em;
+      border: none;
+      border-radius: 3px;
+      padding: .85rem 1.8rem;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-gold:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      font-weight: 500;
+      font-size: .88rem;
+      letter-spacing: .04em;
+      border: 1px solid var(--gold);
+      border-radius: 3px;
+      padding: .82rem 1.6rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-outline:hover { background: rgba(201,168,76,.1); }
+
+    /* Testimonial */
+    .testimonial-card {
+      background: rgba(22,37,68,0.55);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+    }
+    .stars { color: var(--gold); font-size: .9rem; letter-spacing: .05em; }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid rgba(201,168,76,.12);
+    }
+    .faq-btn {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.35rem 0;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: .97rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .faq-btn:hover { color: var(--gold2); }
+    .faq-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .3s;
+      color: #A0B0C4;
+      font-size: .9rem;
+      line-height: 1.7;
+      padding-bottom: 0;
+    }
+    .faq-body.open { max-height: 400px; padding-bottom: 1.2rem; }
+    .faq-icon { transition: transform .3s; color: var(--gold); font-size: 1.2rem; flex-shrink: 0; }
+    .faq-icon.open { transform: rotate(45deg); }
+
+    /* Disclaimer */
+    .disclaimer-section {
+      background: rgba(11,22,40,0.9);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Ticker tape */
+    .ticker-wrap {
+      overflow: hidden;
+      background: rgba(15,30,56,0.9);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .ticker-inner {
+      display: flex; gap: 0;
+      width: max-content;
+      animation: ticker 120s linear infinite;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      padding: .55rem 2.2rem;
+      font-size: .75rem;
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: .04em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .ticker-item span { color: var(--gold2); margin-right: .4rem; }
+    .ticker-item .up   { color: #4ADE80; }
+    .ticker-item .down { color: #F87171; }
+
+    /* Floating grid lines */
+    .grid-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* Sponsor bar */
+    .sponsor-pill {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(201,168,76,.08);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: .45rem 1rem;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold3);
+    }
+    .sponsor-logo {
+      background: rgba(201,168,76,.15);
+      border: 1px solid rgba(201,168,76,.25);
+      border-radius: 2px;
+      padding: .65rem 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--gold2);
+      letter-spacing: .06em;
+    }
+
+    @media (max-width: 640px) {
+      .conf-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Subtle glow on prize number */
+    .prize-glow {
+      filter: drop-shadow(0 0 32px rgba(201,168,76,.25));
+    }
+
+    /* Section labels */
+    .section-label {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      background: #060E1C;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Nav mobile */
+    #nav-mobile { display: none; }
+    #nav-mobile.show { display: flex; }
+
+    /* Animate in hero content */
+    .hero-content > * { animation: fadeUp .7s ease both; }
+    .hero-content > *:nth-child(1) { animation-delay: .05s; }
+    .hero-content > *:nth-child(2) { animation-delay: .15s; }
+    .hero-content > *:nth-child(3) { animation-delay: .25s; }
+    .hero-content > *:nth-child(4) { animation-delay: .35s; }
+    .hero-content > *:nth-child(5) { animation-delay: .45s; }
+    .hero-content > *:nth-child(6) { animation-delay: .55s; }
+    .hero-content > *:nth-child(7) { animation-delay: .65s; }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav class="nav-bar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href="#" class="display font-bold text-sm tracking-wide" style="color:var(--gold2)">
+      MICROCAP<span style="color:var(--muted)">CONTEST</span><span style="color:var(--gold);font-size:.65rem;vertical-align:super;margin-left:2px">2026</span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-7">
+
+  <a href="https://infoarb.io/" target="_blank"
+     class="text-xs tracking-widest uppercase hover:text-yellow-300 transition-colors"
+     style="color:var(--muted)">
+    InfoArb Monitor
+  </a>
+
+  <a href="https://geoinvesting.com/" target="_blank"
+     class="text-xs tracking-widest uppercase hover:text-yellow-300 transition-colors"
+     style="color:var(--muted)">
+    GeoInvesting
+  </a>
+
+  <a href="https://mscliffnotes.substack.com/" target="_blank"
+     class="text-xs tracking-widest uppercase hover:text-yellow-300 transition-colors"
+     style="color:var(--muted)">
+    Cliff Notes Substack
+  </a>
+
+<a href="#register" class="btn-gold text-xs py-2 px-4">
+  Submit Picks
+</a>
+
+</div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-5 h-px bg-white"></span>
+      <span class="block w-5 h-px bg-white"></span>
+      <span class="block w-5 h-px bg-white"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+ <div id="nav-mobile" class="flex-col px-6 pb-5 gap-4 md:hidden border-t" style="border-color:var(--border)">
+
+  <a href="https://infoarb.io/" target="_blank"
+     class="text-xs tracking-widest uppercase py-1"
+     style="color:var(--muted)">
+    InfoArb Monitor
+  </a>
+
+  <a href="https://geoinvesting.com/" target="_blank"
+     class="text-xs tracking-widest uppercase py-1"
+     style="color:var(--muted)">
+    GeoInvesting
+  </a>
+
+  <a href="https://mscliffnotes.substack.com/" target="_blank"
+     class="text-xs tracking-widest uppercase py-1"
+     style="color:var(--muted)">
+    Cliff Notes Substack
+  </a>
+
+<a href="#register"
+   class="btn-gold text-xs py-2 px-4 self-start mt-2">
+  Submit Picks
+</a>
+
+</div>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero-section pt-16" id="contest">
+  <div class="grid-overlay"></div>
+  <canvas id="chart-canvas"></canvas>
+
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-20">
+    <div class="hero-content max-w-4xl">
+
+      <!-- Eyebrow / sponsor -->
+<div class="mb-4">
+  <span class="eyebrow">2nd Annual Stock Picking Contest</span>
+</div>
+
+<div class="flex flex-wrap items-center gap-6 mb-8">
+
+<!-- InfoArb -->
+<a
+  href="https://infoarb.io/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="https://microcapcontest.b-cdn.net/IM%20Logo%20White.svg"
+    alt="InfoArb Monitor"
+    style="height:70px;width:auto"
+  />
+</a>
+
+<div style="color:var(--gold);font-size:1.5rem;opacity:.7;font-weight:600">
+  ×
+</div>
+
+<!-- GeoInvesting -->
+<a
+  href="https://geoinvesting.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="https://microcapcontest.b-cdn.net/geo-png-24.png"
+    alt="GeoInvesting"
+    style="height:70px;width:auto"
+  />
+</a>
+
+<div style="color:var(--gold);font-size:1.5rem;opacity:.7;font-weight:600">
+  ×
+</div>
+
+<!-- Cliff Notes -->
+<a
+  href="https://mscliffnotes.substack.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="https://microcapcontest.b-cdn.net/MS%20Cliff%20Notes%20Logo.png"
+    alt="MS Cliff Notes"
+    style="height:70px;width:auto"
+  />
+</a>
+
+</div>
+
+<!-- Main headline -->
+<h1 class="display headline-main mb-4">
+  The 2026 Microcap<br/>Stock Picking Contest
+</h1>
+
+      <!-- Prize -->
+      <div class="mb-4 flex flex-wrap items-center gap-4">
+
+  <span 
+    class="display prize-badge" 
+    style="font-size:clamp(1.4rem,3vw,2.1rem);font-weight:600"
+  >
+    $15,000+ in Cash Prizes + Bonuses
+  </span>
+
+  <span class="entry-badge">
+    No Entry Fee
+  </span>
+
+</div>
+
+ <p style="color:var(--muted);font-size:.95rem;margin-bottom:2.5rem;max-width:48ch;line-height:1.65">
+  Picking is now open for Contest 1 of 3: Planet MicroCap Las Vegas 2026. Submit your official picks between June 28 and July 11, 2026, then follow performance through November 13, 2026.
+</p>
+
+      <!-- CTA buttons -->
+ <div class="flex flex-wrap gap-4 mb-12">
+  <a href="#register" class="btn-gold">Submit Your Picks</a>
+</div>
+
+
+<!-- Conference cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 conf-grid">
+
+  <!-- Conference I -->
+  <a 
+    href="https://www.meetmax.com/sched/event_130817/conference_home.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="conf-card p-5 block"
+  >
+    <div class="mono text-xs mb-3" style="color:var(--gold);letter-spacing:.1em">
+      CONFERENCE I
+    </div>
+
+    <div class="mb-2">
+      <div class="display font-semibold text-base mb-1" style="color:var(--white)">
+        Planet MicroCap
+      </div>
+
+      <div class="conf-link">
+        Visit Website →
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2" style="color:var(--muted);font-size:.8rem">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <path d="M5.5 1C3.015 1 1 3.015 1 5.5S3.015 10 5.5 10 10 7.985 10 5.5 7.985 1 5.5 1z" stroke="currentColor" stroke-width="1.1"/>
+        <path d="M5.5 1v9M1 5.5h9M2.5 3h6M2.5 8h6" stroke="currentColor" stroke-width=".9"/>
+      </svg>
+      Las Vegas &nbsp;•&nbsp; June 2026
+    </div>
+  </a>
+
+  <!-- Conference II -->
+  <a 
+    href="https://smallcapdiscoveries.com/annual-smallcap-discoveries-conference-2026/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="conf-card p-5 block"
+  >
+    <div class="mono text-xs mb-3" style="color:var(--gold);letter-spacing:.1em">
+      CONFERENCE II
+    </div>
+
+    <div class="mb-2">
+      <div class="display font-semibold text-base mb-1" style="color:var(--white)">
+        SmallCap Discoveries
+      </div>
+
+      <div class="conf-link">
+        Visit Website →
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2" style="color:var(--muted);font-size:.8rem">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <path d="M5.5 1C3.015 1 1 3.015 1 5.5S3.015 10 5.5 10 10 7.985 10 5.5 7.985 1 5.5 1z" stroke="currentColor" stroke-width="1.1"/>
+        <path d="M5.5 1v9M1 5.5h9M2.5 3h6M2.5 8h6" stroke="currentColor" stroke-width=".9"/>
+      </svg>
+      Vancouver &nbsp;•&nbsp; September 2026
+    </div>
+  </a>
+
+  <!-- Conference III -->
+  <a 
+    href="https://www.meetmax.com/sched/event_135697/__welcome_cp.html?bank_access=0&event_id=135697"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="conf-card p-5 block"
+  >
+    <div class="mono text-xs mb-3" style="color:var(--gold);letter-spacing:.1em">
+      CONFERENCE III
+    </div>
+
+    <div class="mb-2">
+      <div class="display font-semibold text-base mb-1" style="color:var(--white)">
+        LD Micro
+      </div>
+
+      <div class="conf-link">
+        Visit Website →
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2" style="color:var(--muted);font-size:.8rem">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <path d="M5.5 1C3.015 1 1 3.015 1 5.5S3.015 10 5.5 10 10 7.985 10 5.5 7.985 1 5.5 1z" stroke="currentColor" stroke-width="1.1"/>
+        <path d="M5.5 1v9M1 5.5h9M2.5 3h6M2.5 8h6" stroke="currentColor" stroke-width=".9"/>
+      </svg>
+      Los Angeles &nbsp;•&nbsp; October 2026
+    </div>
+  </a>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════ TICKER ═══════════════════════════ -->
+<div class="ticker-wrap py-0">
+
+<!-- Conference Status Bar -->
+<div 
+  class="text-center py-3 px-4"
+  style="
+    border-bottom:1px solid rgba(201,168,76,.18);
+    background:
+      linear-gradient(
+        90deg,
+        rgba(201,168,76,.04) 0%,
+        rgba(201,168,76,.10) 50%,
+        rgba(201,168,76,.04) 100%
+      );
+    color:var(--gold2);
+    font-size:.8rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:600;
+    position:relative;
+    overflow:hidden;
+  "
+>
+
+<span style="opacity:.9">
+  ✦ Contest 1 of 3: Planet MicroCap Las Vegas 2026 • Pick submissions open June 28 – July 11, 2026
+</span>
+
+</div>
+
+  <!-- Moving ticker -->
+  <div class="ticker-inner" id="ticker-inner">
+    <!-- duplicated via JS -->
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ HOW IT WORKS ═══════════════════════════ -->
+<section class="py-24 px-6" id="how-it-works" style="background:var(--navy2)">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-4">
+      <div class="section-label">The Format</div>
+    </div>
+    <div class="reveal mb-4">
+      <h2 class="display font-semibold" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--white)">How It Works</h2>
+    </div>
+ <div class="reveal mb-14" style="color:var(--muted);font-size:.95rem;max-width:50ch;line-height:1.7">
+  Contest 1 of 3 is now open for Planet MicroCap Las Vegas 2026. Submit your picks by 11:59 PM ET on July 11, 2026.
+</div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 reveal">
+
+  <div class="step-card">
+<div class="display font-semibold text-lg mb-3" style="color:var(--white)">
+  Submit Picks
+</div>
+<p style="color:var(--muted);font-size:.88rem;line-height:1.7">
+  Submit your official Contest 1 picks by 11:59 PM ET on July 11, 2026. No entry fee or subscription required.
+</p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num mb-4">02</div>
+    <div class="display font-semibold text-lg mb-3" style="color:var(--white)">
+      Follow the Conferences
+    </div>
+    <p style="color:var(--muted);font-size:.88rem;line-height:1.7">
+      The contest runs across three major microcap conferences over the course of 2026.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num mb-4">03</div>
+    <div class="display font-semibold text-lg mb-3" style="color:var(--white)">
+      Select Stocks
+    </div>
+  <p style="color:var(--muted);font-size:.88rem;line-height:1.7">
+  For Contest 1, select your picks from eligible Planet MicroCap Las Vegas 2026 presenting companies.
+</p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num mb-4">04</div>
+    <div class="display font-semibold text-lg mb-3" style="color:var(--white)">
+      Track Performance
+    </div>
+    <p style="color:var(--muted);font-size:.88rem;line-height:1.7">
+      Portfolio performance will be tracked publicly on a leaderboard for the duration of the contest.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num mb-4">05</div>
+    <div class="display font-semibold text-lg mb-3" style="color:var(--white)">
+      Win Prizes
+    </div>
+    <p style="color:var(--muted);font-size:.88rem;line-height:1.7">
+      Top performers win cash prizes, bonus awards, and recognition within the microcap community.
+    </p>
+  </div>
+
+</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PRIZE POOL ═══════════════════════════ -->
+<section class="prize-pool-section py-24 px-6" id="prizes">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="reveal">
+        <div class="section-label mb-4">Prize Pool</div>
+        <div class="prize-amount prize-glow mb-3">$15,000+</div>
+        <div class="display font-medium mb-6" style="font-size:1.2rem;color:var(--muted)">Total Prize Pool</div>
+<p style="color:var(--muted);font-size:.92rem;line-height:1.75;max-width:42ch">
+  The full 2026 contest series includes $15,000+ in cash prizes and bonuses. Contest 1, covering Planet MicroCap Las Vegas 2026, has a $5,000 prize pool.
+</p>
+      </div>
+
+      <div class="reveal">
+        <div class="mb-5">
+          <div class="section-label mb-4">Open To Anyone, including</div>
+          <div class="grid grid-cols-1 gap-3">
+            <div class="prize-card"><div class="prize-dot"></div><span style="font-size:.9rem;color:#C8D4E0">Individual investors</span></div>
+            <div class="prize-card"><div class="prize-dot"></div><span style="font-size:.9rem;color:#C8D4E0">Analysts &amp; research professionals</span></div>
+            <div class="prize-card"><div class="prize-dot"></div><span style="font-size:.9rem;color:#C8D4E0">Newsletter writers &amp; publishers</span></div>
+            <div class="prize-card"><div class="prize-dot"></div><span style="font-size:.9rem;color:#C8D4E0">Fund managers</span></div>
+            <div class="prize-card"><div class="prize-dot"></div><span style="font-size:.9rem;color:#C8D4E0">Serious microcap stock pickers</span></div>
+            <div class="prize-card" style="background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3)">
+              <div class="prize-dot" style="background:var(--gold2)"></div>
+              <span style="font-size:.9rem;color:var(--gold2);font-weight:500">No entry fee required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ WHY WE'RE DOING THIS ═══════════════════════════ -->
+<section class="why-section py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+
+      <div class="lg:col-span-2 reveal">
+        <div class="section-label mb-4">Our Thesis</div>
+        <h2 class="display font-semibold mb-4" style="font-size:clamp(1.8rem,3vw,2.5rem);color:var(--white)">Why We're Doing This</h2>
+        <hr class="rule-gold" />
+      </div>
+
+      <div class="lg:col-span-3 reveal">
+        <blockquote class="pullquote mb-8">
+          "Microcap conferences are full of interesting companies, but most investors never have a structured way to track which ideas actually work."
+        </blockquote>
+        <p style="color:var(--muted);font-size:.93rem;line-height:1.8;margin-bottom:1.2rem">
+          This contest is designed to make the process more fun, more transparent, and more competitive. We want to bring accountability and structure to a space that's often driven by intuition alone.
+        </p>
+        <p style="color:var(--muted);font-size:.93rem;line-height:1.8">
+          It's also a way to spotlight real stock-picking skill in the microcap investing community—and reward people who put in the work.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ REGISTRATION ═══════════════════════════ -->
+<section class="reg-section py-24 px-6" id="register">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="grid grid-cols-1 gap-14 items-start">
+
+      <div class="reveal">
+<div class="section-label mb-4">Picking Is Now Open</div>
+<h2 class="display font-semibold mb-5" style="font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white)">Submit Your Contest 1 Picks</h2>
+<p style="color:var(--muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem">
+  Contest 1 of 3 is now open for Planet MicroCap Las Vegas 2026. The submission window runs from <strong style="color:var(--white)">June 28 through July 11, 2026</strong> and closes at <strong style="color:var(--white)">11:59 PM ET on July 11</strong>. Tracking ends on <strong style="color:var(--white)">November 13, 2026</strong>.
+</p>
+<!-- Contest Countdown -->
+<div class="mb-8">
+
+<div class="text-xs tracking-widest uppercase mb-4"
+     style="color:var(--gold);font-weight:500">
+  Pick Submissions Close In
+</div>
+
+  <div class="flex gap-3 flex-wrap">
+
+    <div class="countdown-block">
+      <div class="countdown-num" id="days">00</div>
+      <div class="countdown-lbl">Days</div>
+    </div>
+
+    <div class="countdown-block">
+      <div class="countdown-num" id="hours">00</div>
+      <div class="countdown-lbl">Hours</div>
+    </div>
+
+    <div class="countdown-block">
+      <div class="countdown-num" id="minutes">00</div>
+      <div class="countdown-lbl">Minutes</div>
+    </div>
+
+    <div class="countdown-block">
+      <div class="countdown-num" id="seconds">00</div>
+      <div class="countdown-lbl">Seconds</div>
+    </div>
+
+  </div>
+
+</div>
+
+<div>
+  <div class="benefit-item"><span class="benefit-check">✦</span> Contest 1 submission window: June 28 – July 11, 2026</div>
+  <div class="benefit-item"><span class="benefit-check">✦</span> Submissions close at 11:59 PM ET on July 11</div>
+  <div class="benefit-item"><span class="benefit-check">✦</span> Prize pool for this phase: $5,000</div>
+  <div class="benefit-item"><span class="benefit-check">✦</span> Tracking ends November 13, 2026</div>
+  <div class="benefit-item"><span class="benefit-check">✦</span> Once submitted, your picks are final and cannot be changed</div>
+</div>
+      </div>
+
+      <div class="reveal">
+        <div class="conf-card p-8">
+          <div class="display font-semibold text-lg mb-6" style="color:var(--white)">Official Pick Submission</div>
+
+          <div>
+<p style="color:var(--muted);font-size:.9rem;line-height:1.75;margin-bottom:1.25rem">
+  Enter your official picks for Contest 1 of 3: Planet MicroCap Las Vegas 2026. The window closes at 11:59 PM ET on July 11, 2026. Once submitted, your picks are final and cannot be changed.
+</p>
+
+<div style="border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#0F1E38">
+  <iframe
+    data-tally-src="https://tally.so/embed/ZjWP20?alignLeft=1&hideTitle=1&dynamicHeight=1"
+    loading="lazy"
+    width="100%"
+    height="907"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    title="Microcap Contest 2026"
+    style="display:block"
+  ></iframe>
+</div>
+
+<p style="color:var(--muted);font-size:.78rem;line-height:1.6;margin-top:1rem">
+  Having trouble with the embedded form?
+  <a
+    href="https://tally.so/r/ZjWP20"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="color:var(--gold2);text-decoration:underline"
+  >
+    Open it in a new tab.
+  </a>
+</p>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ FAQ ═══════════════════════════ -->
+<section class="py-24 px-6" style="background:var(--charcoal)">
+  <div class="max-w-3xl mx-auto">
+    <div class="reveal mb-4"><div class="section-label">Questions</div></div>
+    <div class="reveal mb-12">
+      <h2 class="display font-semibold" style="font-size:clamp(1.8rem,3vw,2.5rem);color:var(--white)">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="reveal" id="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Is there an entry fee?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">No. There is no entry fee of any kind. The 2026 Microcap Stock Picking Contest is completely free to enter for all eligible participants.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Do I need a subscription to participate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">No subscription is required to GeoInvesting, MS Microcaps, or any other service. It’s 100% free to enter, play and collect prizes.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Who can participate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">The contest is open to anyone, including investors, analysts, newsletter writers, fund managers, and serious microcap stock pickers.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          How are winners determined?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">Winners for Contest 1 will be determined based on portfolio performance through November 13, 2026. The prize pool for this phase is $5,000. Please review the final rules for full scoring methodology, eligibility, and prize allocation details.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Where can I view the full contest rules?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">The final rules are available for Contest 1 of 3: Planet MicroCap Las Vegas 2026. Pick submissions are open from June 28 through July 11, 2026 and close at 11:59 PM ET on July 11.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Are stock recommendations provided as part of the contest?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">No. This contest does not provide investment advice or stock recommendations. Participants are solely responsible for their own research and investment decisions. The contest is for educational and entertainment purposes only. See full terms and conditions here.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          Which conferences are included?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">The 2026 contest series spans three conferences. Contest 1 is Planet MicroCap Las Vegas 2026, with submissions open June 28 through July 11, 2026. Contest 2 will cover SmallCap Discoveries Vancouver, and Contest 3 will cover LD Micro Los Angeles.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Beyond the Contest -->
+<section class="relative py-24 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+
+ <!-- Section header -->
+<div class="max-w-4xl mb-12">
+
+  <div class="mono text-xs mb-4"
+       style="color:var(--gold);letter-spacing:.14em">
+    BEYOND THE CONTEST
+  </div>
+
+  <h2 class="display font-semibold mb-6 leading-tight"
+      style="font-size:clamp(1.8rem,3.2vw,2.6rem);color:var(--white)">
+    The Work Starts After the Conference Ends
+  </h2>
+
+  <p style="color:var(--muted);font-size:.93rem;line-height:1.8;margin-bottom:1.2rem">
+    Planet MicroCap. SmallCap Discoveries. LD Micro. Three of the strongest sources of microcap idea flow on the calendar.
+    Across the three conferences, investors will see hundreds of companies pitch throughout 2026.
+  </p>
+
+  <p style="color:var(--muted);font-size:.93rem;line-height:1.8;margin-bottom:1.2rem">
+    We’ll be carefully monitoring the stocks selected throughout the contest because we believe these conferences bring together
+    some of the sharpest investors in the smaller-cap world.
+  </p>
+
+  <p style="color:var(--muted);font-size:.93rem;line-height:1.8">
+    This will be powered by the new InfoArb Monitor tool our team built, used by GeoInvesting and Microcap Investing Cliff Notes.
+  </p>
+
+</div>
+
+<!-- Highlight line -->
+<div class="conf-card p-6 mb-14">
+
+  <div class="display leading-relaxed"
+       style="font-size:1.15rem;color:var(--white)">
+
+    The work of figuring out which of your picks actually compound continues for another twelve to twenty-four months.
+    <strong>Below is the system we use to do that work — every day, on every name.</strong>
+
+  </div>
+
+</div>
+
+  <!-- Product cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+  <!-- InfoArb -->
+  <a
+    href="https://infoarb.io/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="product-card block p-7 rounded-3xl"
+  >
+    <div class="mono text-xs mb-4" style="color:var(--gold);letter-spacing:.12em">
+      RESEARCH TERMINAL
+    </div>
+
+    <h3 class="display text-xl font-semibold mb-4" style="color:var(--white)">
+      InfoArb Monitor
+    </h3>
+
+    <p class="leading-relaxed mb-6" style="color:var(--muted);font-size:.92rem;line-height:1.65">
+      Every company you saw pitch keeps filing, reporting earnings, and releasing news whether you're watching or not.
+      InfoArb Monitor tracks press releases, SEC filings, and earnings call transcripts across the U.S. and Canadian
+      microcap universe — including every presenter at all three conferences.
+    </p>
+
+    <p class="leading-relaxed mb-6" style="color:var(--muted);font-size:.92rem;line-height:1.65">
+      The place where a thesis formed during a fifteen-minute pitch either gets confirmed by execution, or quietly breaks.
+    </p>
+
+    <div class="conf-link">
+      Explore →
+    </div>
+  </a>
+
+  <!-- Cliff Notes -->
+  <a
+    href="https://mscliffnotes.substack.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="product-card block p-7 rounded-3xl"
+  >
+    <div class="mono text-xs mb-4" style="color:var(--gold);letter-spacing:.12em">
+      RESEARCH NOTES & INDEX
+    </div>
+
+    <h3 class="display text-xl font-semibold mb-4" style="color:var(--white)">
+      Microcap Investing Cliff Notes
+    </h3>
+
+    <p class="leading-relaxed mb-6" style="color:var(--muted);font-size:.92rem;line-height:1.65">
+      A quality filter for the universe these conferences put in front of you.
+      The Multibagger Quality Index applies a systematic process that merges quality and multibagger factors our team has invested in for over 30 years. Every name that passes gets a Cliff Note: thesis, catalysts, valuation and risks.
+    </p>
+
+    <p class="leading-relaxed mb-6" style="color:var(--muted);font-size:.92rem;line-height:1.65">
+      Since launch in 2022, <strong style="color:var(--white)">76 out of 144 stocks (53%) in the index became multibaggers.</strong>
+      Losers remain in the index for transparency. One to three stocks are added to the index every month.
+    </p>
+
+    <div class="conf-link">
+      Explore →
+    </div>
+  </a>
+
+  <!-- GeoInvesting -->
+  <div class="product-card block p-7 rounded-3xl clickable" data-url="https://geoinvesting.com/">
+
+    <div class="mono text-xs mb-4" style="color:var(--gold);letter-spacing:.12em">
+      MODEL PORTFOLIOS & RESEARCH ARCHIVE
+    </div>
+
+    <h3 class="display text-xl font-semibold mb-4" style="color:var(--white)">
+      GeoInvesting
+    </h3>
+
+    <p class="leading-relaxed mb-6" style="color:var(--muted);font-size:.92rem;line-height:1.65">
+      Seventeen years of archived microcap research. Many companies presenting this year have been tracked here across multiple cycles and management teams.
+    </p>
+
+    <p class="leading-relaxed mb-6" style="color:var(--muted);font-size:.92rem;line-height:1.65">
+      Frauds we identified (
+      <a href="https://www.imdb.com/title/tt7215388/" target="_blank" rel="noopener noreferrer" style="color:var(--gold2);text-decoration:underline;">
+        The China Hustle
+      </a>,
+      Zombie Index). Theses that worked. Theses that didn't, and why. When the Cliff Note isn't enough, this is the next floor down.
+    </p>
+
+    <a href="https://geoinvesting.com/" class="conf-link" target="_blank" rel="noopener noreferrer">
+      Explore →
+    </a>
+
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════ SPONSORS ═══════════════════════════ -->
+<section class="py-20 px-6" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="max-w-4xl mx-auto text-center">
+
+    <div class="section-label mb-8 reveal">Presented By</div>
+
+    <div class="flex flex-wrap items-center justify-center gap-10 reveal">
+
+      <!-- InfoArb -->
+      <a href="https://infoarb.io/" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://microcapcontest.b-cdn.net/IM%20Logo%20White.svg"
+          alt="InfoArb Monitor"
+          style="height:60px;width:auto"
+        />
+      </a>
+
+      <!-- GeoInvesting -->
+      <a href="https://geoinvesting.com/" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://microcapcontest.b-cdn.net/geo-png-24.png"
+          alt="GeoInvesting"
+          style="height:60px;width:auto"
+        />
+      </a>
+
+      <!-- Cliff Notes -->
+      <a href="https://mscliffnotes.substack.com/" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://microcapcontest.b-cdn.net/MS%20Cliff%20Notes%20Logo.png"
+          alt="MS Cliff Notes"
+          style="height:52px;width:auto"
+        />
+      </a>
+
+    </div>
+
+    <p class="text-xs mt-6 reveal"
+       style="color:var(--muted);max-width:50ch;margin-left:auto;margin-right:auto;line-height:1.7">
+      GeoInvesting and MS Microcaps research microcap stocks, track management teams, and analyze market opportunities. This contest gives independent investors, analysts, fund managers, and newsletter writers a structured way to showcase stock-picking skill in the microcap landscape.
+    </p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DISCLAIMER ═══════════════════════════ -->
+<section class="disclaimer-section py-12 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 mt-0.5">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:var(--gold)"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM8 5v3.5M8 10.5v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="text-xs tracking-widest uppercase mb-2" style="color:var(--gold);font-weight:500">Disclaimer</div>
+        <p style="color:var(--muted);font-size:.8rem;line-height:1.75">
+          This contest is for educational and entertainment purposes only. Nothing on this page should be considered investment advice or a recommendation to buy or sell any security. All investing involves risk, including the possible loss of principal. Participants are responsible for their own research and investment decisions. Past performance is not indicative of future results. GeoInvesting and MS Microcaps are not registered investment advisors.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="py-14 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+      <div class="md:col-span-2">
+        <div class="display font-bold text-base mb-3" style="color:var(--gold2)">
+          MICROCAP CONTEST 2026
+        </div>
+        <p style="color:var(--muted);font-size:.82rem;line-height:1.75;max-width:36ch">
+          Sponsored by GeoInvesting and MS Microcaps. A stock picking competition for microcap investors.
+        </p>
+        <div class="flex gap-3 mt-5">
+          <div class="sponsor-logo" style="font-size:.75rem;padding:.5rem .9rem">GeoInvesting</div>
+          <div class="sponsor-logo" style="font-size:.75rem;padding:.5rem .9rem">MS Microcaps</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xs tracking-widest uppercase mb-4" style="color:var(--gold);font-weight:500">Contest</div>
+        <div class="flex flex-col gap-3">
+          <a href="#contest" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">2026 Contest</a>
+          <a href="#prizes" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">Prize Pool</a>
+          <a href="#how-it-works" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">How It Works</a>
+          <a href="#register" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">Submit Picks</a>
+          <span class="text-xs" style="color:#4A5568">Contest Rules <span style="color:var(--gold);font-size:.65rem">(Coming Soon)</span></span>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xs tracking-widest uppercase mb-4" style="color:var(--gold);font-weight:500">Resources</div>
+        <div class="flex flex-col gap-3">
+          <a href="https://geoinvesting.com" target="_blank" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">About GeoInvesting</a>
+          <a href="https://mscliffnotes.substack.com" target="_blank" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">Cliff Notes Substack</a>
+		  <a href="https://infoarb.io/" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">InfoArb Monitor</a>
+          <a href="https://deltasheets.substack.com/" target="_blank" class="text-xs hover:text-white transition-colors" style="color:var(--muted)">InfoArb Sheets</a>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="rule-gold mb-6" />
+
+    <div class="flex flex-col sm:flex-row justify-between gap-3">
+      <p class="text-xs" style="color:#4A5568">© 2026 GeoInvesting &amp; MS Microcaps. All rights reserved.</p>
+      <p class="text-xs" style="color:#4A5568">Educational &amp; entertainment purposes only. Not investment advice.</p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════ SCRIPTS ═══════════════════════════ -->
+<script>
+/* ── Hamburger ── */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('nav-mobile').classList.toggle('show');
+});
+
+
+/* ── Ticker tape ── */
+const tickers = [
+  'BRAI','BILD.V','PALS.V','CWD','MBAI','GELS','BUDA','CTW','IDN','LOVE.TO',
+  'IQST','ATGN','FCI','PCSV','SKYX','ZOMD.V','ACNT','XTRA','IMP','NURS.V',
+  'IVF','PDEX','LRGR','DRT','BOGO','RX.V','PLBY','BOS.TO','LIB.V','RNGE',
+  'ASYS','DLPN','SLYG','DIBS','CITR','SNWV','GRID','LODE','BLZE','CXDO',
+  'IRIX','NLH.V','ROMJ.V','DUOT','KINS','HITI','TMG.V','VDTA','KWY','NLCP',
+  'MDBH','WATT','KDOZ','KLNG','ERTH.CN','DAIO','JSDA','PAYS','ACCS','IEHC',
+  'NEWT','VELO','ETST','LSF','POCI','TSSI','CREX','COCH','AMNF','KOPN',
+  'NMTC','ATCH','CYBT.CN','WAVE','ZDGE','MPTI','KITS.TO','BYL','JRSH','PPSI',
+  'USIO','PINK.V','ECOR','ENW','FOR.V','TELI.CN','ELWT','LGL','BOF','HGBL',
+  'ACFN','UMAC','AYTU','NTRP','PRPO','TATT','EONR','LINK','ELUT','MAMA',
+  'SOFW','OPHC','MLCI','INBS','IDR','PHX.TO','FTK','ZDC','FET','OIS',
+  'KBSX','DCGO','DC','NXGL','INDO','BSEM','STRW','SALT','FEAM','DB.V',
+  'USAQ','NXLV','PHX','CZZL.NE','NBM.V','ARG.TO','DHX','MCB','SUNXF',
+  'KLYG','NWTG','TRCK','BLM','AUUA.V','AKA','ACON'
+];
+
+/* ── Product box ── */
+document.querySelectorAll('.clickable').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const url = card.dataset.url;
+    if (url) window.open(url, '_blank');
+  });
+
+  // prevent card click when clicking real links inside
+  card.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  });
+});
+
+const inner = document.getElementById('ticker-inner');
+
+const html = tickers.map(t =>
+  `<div class="ticker-item">
+    <span style="color:var(--gold2)">${t}</span>
+  </div>`
+).join('');
+
+inner.innerHTML = html + html; // duplicate for seamless loop
+
+/* ── Scroll reveal ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── Pick Submission Countdown ── */
+
+// Pick submissions close July 11, 2026 at 11:59 PM Eastern
+const contestStart = new Date("2026-07-11T23:59:00-04:00");
+
+function updateCountdown() {
+
+  const now = new Date();
+  const diff = contestStart - now;
+
+  if (diff <= 0) {
+  document.getElementById('days').textContent = '00';
+  document.getElementById('hours').textContent = '00';
+  document.getElementById('minutes').textContent = '00';
+  document.getElementById('seconds').textContent = '00';
+  return;
+}
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+/* ── FAQ toggle ── */
+function toggleFaq(btn) {
+  const body = btn.nextElementSibling;
+  const icon = btn.querySelector('.faq-icon');
+  const open = body.classList.contains('open');
+  document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
+  if (!open) { body.classList.add('open'); icon.classList.add('open'); }
+}
+
+/* ── Animated chart canvas ── */
+(function() {
+  const canvas = document.getElementById('chart-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, points = [], t = 0;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Generate two synthetic price series
+  function makePoints(seed, trend, volatility, n) {
+    const pts = [];
+    let price = seed;
+    for (let i = 0; i < n; i++) {
+      price += (Math.random() - 0.48) * volatility + trend;
+      pts.push(price);
+    }
+    return pts;
+  }
+
+  const series1 = makePoints(200, 0.3, 8, 160);
+  const series2 = makePoints(150, 0.1, 5, 160);
+
+  function normalize(pts, yMin, yMax) {
+    const lo = Math.min(...pts), hi = Math.max(...pts);
+    return pts.map(v => yMin + (1 - (v - lo) / (hi - lo)) * (yMax - yMin));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    const drawSeries = (pts, color) => {
+      const n = pts.length;
+      const norm = normalize(pts, H * 0.15, H * 0.88);
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = (i / (n - 1)) * W;
+        const y = norm[i];
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = color;
+      ctx.lineWidth   = 1.4;
+      ctx.stroke();
+
+      // Gradient fill
+      const grad = ctx.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, color.replace(')', ',0.18)').replace('rgb', 'rgba'));
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+    };
+
+    drawSeries(series1, 'rgba(201,168,76,1)');
+    drawSeries(series2, 'rgba(100,180,255,1)');
+
+    // Subtle horizontal grid
+    ctx.strokeStyle = 'rgba(201,168,76,0.07)';
+    ctx.lineWidth = 1;
+    for (let i = 1; i < 6; i++) {
+      ctx.beginPath();
+      ctx.moveTo(0, (H / 6) * i);
+      ctx.lineTo(W, (H / 6) * i);
+      ctx.stroke();
+    }
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
